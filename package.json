@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bleno": "^0.4.0"
+    "bleno": "0.4.0",
+    "node-pixel": "0.6.1"
   }
 }
