@@ -2,14 +2,14 @@ var bleno = require('bleno');
 var spawn = require("child_process").spawn;
 
 var name = 'raspberrypi';
-var serviceUuids = ['180F'];
+var serviceUuids = ['F1D8C0D14A4F4B43-9A5B7C59BD85EE57'];
 
 var primaryService = new bleno.PrimaryService({
-    uuid: 'F1D8C0D1-4A4F-4B43-9A5B-7C59BD85EE57',
+    uuid: 'F1D8C0D14A4F4B439A5B7C59BD85EE57',
     characteristics: [
         new bleno.Characteristic({
 	    //illumination type
-            uuid: 'F1D8C0D1-4A4F-4B43-9A5B-7C59BD85EE58',
+            uuid: 'F1D8C0D14A4F4B439A5B7C59BD85EE58',
             properties: ['write'],
             value: new Buffer([0x00]),
             onWriteRequest: function(data, offset, withoutResponse, callback) { 
@@ -17,7 +17,7 @@ var primaryService = new bleno.PrimaryService({
             }
 	})
 	,new bleno.Characteristic({
-            uuid: 'F1D8C0D1-4A4F-4B43-9A5B-7C59BD85EE59',
+            uuid: 'F1D8C0D14A4F4B439A5B7C59BD85EE59',
             properties: ['write'],
             value: new Buffer([0x00, 0x00, 0x00]),
             onWriteRequest: function(data, offset, withoutResponse, callback) { 
