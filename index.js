@@ -1,8 +1,10 @@
 var bleno = require('bleno');
+var Characteristic = bleno.Characteristic;
 var spawn = require("child_process").spawn;
 
 var name = 'raspberrypi';
 var serviceUuids = ['F1D8C0D14A4F4B43-9A5B7C59BD85EE57'];
+var process = undefined;
 
 var primaryService = new bleno.PrimaryService({
     uuid: 'F1D8C0D14A4F4B439A5B7C59BD85EE57',
@@ -14,6 +16,7 @@ var primaryService = new bleno.PrimaryService({
             value: new Buffer([0x00]),
             onWriteRequest: function(data, offset, withoutResponse, callback) { 
                 console.log('write', data);
+		callback(Characteristic.RESULT_SUCCESS);
             }
 	})
 	,new bleno.Characteristic({
@@ -22,7 +25,11 @@ var primaryService = new bleno.PrimaryService({
             value: new Buffer([0x00, 0x00, 0x00]),
             onWriteRequest: function(data, offset, withoutResponse, callback) { 
                 console.log('write', data);
-                var process = spawn('python',["strandtest.py", data[0], data[1], data[2]]);
+                if(process != undefined){
+                process.kill();
+                }
+                process = spawn('python',["strandtest.py", data[0], data[1], data[2]]);
+		callback(Characteristic.RESULT_SUCCESS);
             }
         })
     ]
