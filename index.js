@@ -28,7 +28,10 @@ var primaryService = new bleno.PrimaryService({
                 if(process != undefined){
                 process.kill();
                 }
-                process = spawn('python',["strandtest.py", data[0], data[1], data[2]]);
+                process = spawn('python', ["./strandtest.py", data[0].toString(16), data[1].toString(16), data[2].toString(16)]);
+                console.log('r', data[0]);
+                console.log('g', data.readUInt8(1));
+                console.log('b', data[2]);
 		callback(Characteristic.RESULT_SUCCESS);
             }
         })
